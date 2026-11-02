@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  /* LabJamu Design Tokens */
+  --color-botanical: #1B4332;
+  --color-botanical-light: #2D6A4F;
+  --color-rice-husk: #FDFBF7;
+  --color-rice-husk-dark: #F5F0E8;
+  --color-turmeric: #E9A03B;
+  --color-turmeric-dark: #C87D1A;
+  --color-slate: #2D3748;
+  --color-slate-light: #4A5568;
+  --color-safe: #38A169;
+  --color-warn: #D69E2E;
+  --color-danger: #E53E3E;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* Base layer overrides */
+* {
+  border-color: var(--color-border, #e2e8f0);
+}
+
+body {
+  background-color: var(--color-rice-husk);
+  color: var(--color-slate);
+  font-family: var(--font-sans);
+  /* Safe area for mobile notch/home-bar */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Chat bubble animations */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.2s ease-out;
+}
+
+/* Typing indicator */
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%            { transform: scale(1.0); opacity: 1.0; }
+}
+.typing-dot {
+  animation: bounce-dot 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
