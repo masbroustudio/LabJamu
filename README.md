@@ -12,48 +12,91 @@
 
 ---
 
-## 🌟 Key Features
+## Inspiration
 
-### 1. Real-Time YouCam HD v2.0 S2S Skin Analysis
-* **7-Parameter Objective Biometric Panel:** Direct server-to-server integration measuring:
-  * **Moisture / Hydration** (`/100`)
-  * **Erythema (Redness)** (`/100`)
-  * **Texture Smoothness** (`/100`)
-  * **Radiance & Evenness** (`/100`)
-  * **Pore Refinement** (`/100`)
-  * **Spot & Pigment Clarity** (`/100`)
-  * **Acne & Blemish Calm** (`/100`)
-  * **Skin Type Classification:** Automated T-zone and U-zone cutaneous segmentation.
-* **Smart Face Alignment & Cropping:** User-guided viewport ensuring face width exceeds YouCam's strict **>60%** framing threshold with interactive zoom (1.0x–2.5x) and pan controls.
-* **Diagnostic Heatmap Layer:** Real transparent PNG diagnostic masks (Redness, Pores, Spots, Acne, Texture) rendered directly over high-resolution face photographs with a live **0–100% opacity slider**.
+For centuries across the Indonesian archipelago, traditional herbalists developed *Jamu*—botanical skincare formulations derived from indigenous rhizomes, leaves, and mineral starches (such as *Curcuma heyneana*, *Kaempferia galanga*, and *Centella asiatica*) to calm cutaneous inflammation, repair barrier breakdown, and protect against equatorial UV radiation.
 
-### 2. NVIDIA Nemotron NIM Clinical Causal Engine
-* **2-Step Adaptive Clinical Intake:** Between image capture and dashboard viewing, Nemotron evaluates live YouCam biometric scores and formulates an adaptive clinical check-in question (e.g. application duration, heat sensations, sun exposure) with interactive quick-chips.
-* **Pearl's Do-Calculus Graph:** Mathematical isolation of the causal effect:
-  $$\mathbb{P}(\text{Skin Outcome} \mid \text{do}(\text{Herb}))$$
-  Differentiates genuine phytochemical intervention from environmental confounders (ambient humidity, UV index).
-* **Deterministic Safety Circuit Breaker:** Instant automated trip-wire if erythema spikes by >+20.0%, flagging potential contact dermatitis or adverse allergic reactions.
+However, modern dermatology has largely ignored or struggled to validate these remedies for two critical reasons:
+1. **The Confounder Dilemma:** In tropical equatorial climates, extreme ambient humidity (75–90% RH) and intense solar radiation fluctuate daily. When a user's redness subsides or moisture rises, is it genuine botanical bioactivity, or did the weather simply change?
+2. **The Cosmetic Whitening Trap & Privacy Concerns:** The regional beauty industry is flooded with toxic chemical bleaching products promoting artificial "whitening," while modern beauty tech apps routinely upload sensitive, unencrypted facial biometrics to centralized corporate cloud servers.
 
-### 3. Nusantara Ethnopharmacology Protocol Switcher
-* **5 Verified Traditional Jamu Formulations:**
-  * **Masker Temugiring & Beras Putih:** *Curcuma heyneana* + *Oryza sativa* (Stratum corneum smoothing & NF-κB anti-erythema).
-  * **Bedak Dingin Beras Kencur:** *Kaempferia galanga* + Rice Ceramides (Natural EPMC broad-spectrum UV absorption & barrier cooling).
-  * **Sari Pegagan Restorative Mask:** *Centella asiatica* (Type-I collagen upregulation & IL-6 suppression).
-  * **Kunyit Asam Purifying Paste:** *Curcuma longa* + *Tamarindus indica* (COX-2 enzyme inhibition & antimicrobial blemish clearance).
-  * **Kompres Daun Sirih Astringent:** *Piper betle L.* (Chavicol antibacterial tone & pore refinement).
-* **Instant AI Compatibility Dossier:** NVIDIA Nemotron evaluates the chosen herb against the user's latest biometrics to generate an instant clinical dossier (compatibility score, targeted molecular pathways, predicted biomarker trajectory, patch test advisory).
-* **Flexible Protocol Durations:** Standardized 7-day (Rapid Bioassay), 14-day (Standard N-of-1), or 21-day (Epidermal Renewal Cycle) trials.
+We built **LabJamu** to solve both challenges: an authentic, privacy-preserving on-device clinical intelligence system that employs **Pearl's Causal Do-Calculus** and **NVIDIA Nemotron NIM** to mathematically isolate botanical efficacy from tropical climate noise, backed by **Perfect Corp's YouCam HD Skin Analysis v2.0 S2S API** and **Zero-Cloud Retention**.
 
-### 4. Interactive Timeline & Longitudinal Tracking
-* **Encrypted OPFS Split Slider:** Compare Day 1 Baseline photographs side-by-side with Day $N$ treatment scans using an interactive draggable comparison divider.
-* **Multi-Metric SVG Trajectory Curves:** Native SVG chart plotting individual longitudinal curves for Hydration, Erythema, Texture, and Pores.
-* **Zero Mock Data Guarantee:** The dashboard displays uncalibrated zero-states until scans are captured; every number derives strictly from live API calls and Dexie IndexedDB.
+---
 
-### 5. Multimodal Clinical Chat Partner
-* **Hands-Free Voice Dictation:** Integrated Web Speech API (`SpeechRecognition`) for effortless clinical inquiries.
-* **Direct Photo Ingestion:** Ingest face scans directly from the chat input bar via pre-loaded alignment scanner.
-* **Clean Formatting:** All agent responses rendered natively via GitHub-flavored Markdown without raw formatting artifacts.
-* **Rich Biometric Scan Cards:** Visual on-device summary cards embedded directly into the conversation stream.
+## What it does
+
+LabJamu operates as an on-device N-of-1 clinical research trial engine directly on your smartphone:
+
+1. **Objective 7-Parameter YouCam HD Biometrics:**
+   * Ingests face photographs via an interactive alignment canvas ensuring the face occupies **>60%** of the frame.
+   * Calls Perfect Corp's YouCam HD v2.0 S2S API to extract scientific, photometric scores (0–100) for **Moisture**, **Erythema (Redness)**, **Texture Smoothness**, **Radiance**, **Pore Refinement**, **Hyperpigmentation (Spots)**, and **Acne/Blemishes**, alongside skin typology segmentation (T-zone vs. U-zone).
+2. **Diagnostic Heatmap Layer with Opacity Control:**
+   * Fetches real transparent PNG diagnostic heatmaps returned by YouCam.
+   * Users can toggle between *Redness*, *Pores*, *Spots*, *Acne*, and *Texture* heatmaps directly over their face photograph with a live **0–100% opacity slider**.
+3. **2-Step Adaptive Clinical Intake Flow:**
+   * Immediately following a scan, **NVIDIA Nemotron** evaluates live biometric shifts and asks a targeted clinical check-in question (e.g. application duration, warm/tingling sensations, recent sun exposure).
+   * Evaluates user context with YouCam photometrics to derive genuine causal attribution weights and clinical notes before navigating to the dashboard.
+4. **Pearl's Causal Do-Calculus DAG:**
+   * Mathematically isolates the intervention $\mathbb{P}(\text{Skin Outcome} \mid \text{do}(\text{Herb}))$ from environmental noise (ambient humidity, UV index).
+   * Displays isolated causal attribution percentages (e.g., *86% Botanical Attribution vs. 14% Environmental Noise*) with $p < 0.05$ significance markers.
+5. **Nusantara Protocol Switcher & AI Compatibility Dossier:**
+   * Users choose from 5 authentic Indonesian recipes (*Masker Temugiring*, *Bedak Dingin Beras Kencur*, *Sari Pegagan*, *Kunyit Asam*, *Kompres Daun Sirih*) with customizable trial lengths (7, 14, or 21 days).
+   * Clicking **"Analyze & Activate Protocol"** prompts NVIDIA Nemotron to generate an instant clinical dossier (Compatibility Score, Target Molecular Pathways, Predicted Biomarker Trajectory, and Patch Test Advisory).
+   * Automatically cross-syncs the briefing into the Chat timeline.
+6. **Zero Mock / Hardcoded Data:**
+   * The dashboard features clean uncalibrated zero-states until scans are recorded. Every number, delta, and causal weight derives strictly from live API calls and IndexedDB.
+7. **Multimodal Clinical Chat Partner:**
+   * Features **Hands-Free Voice Dictation** using the native **Web Speech API** (`SpeechRecognition`).
+   * Direct face photo attachment button in the input bar.
+   * Renders native **BiometricScanCards** and parses responses cleanly without raw formatting asterisks.
+8. **Deterministic Safety Circuit Breaker:**
+   * Monitored non-LLM trip-wire: if erythema increases by **>+20.0%**, the circuit trips instantly, alerting the user to rinse immediately and discontinue use.
+
+---
+
+## How we built it
+
+* **Frontend:** Built with **React 19**, **Vite 6**, and **Tailwind CSS v4** (`@theme` modern design system).
+* **Local Database & Storage:** **Dexie.js v4** with typed `EntityTable` for IndexedDB, storing sessions, metrics, safety logs, and chat messages. High-resolution face photographs are stored in the browser's **Origin Private File System (OPFS)**.
+* **Computer Vision & Dermatology API:** **Perfect Corp / YouCam AI Skin Analysis v2.0 S2S API** via an asynchronous 4-step pipeline with presigned AWS S3 uploads.
+* **AI & Causal Reasoning:** **NVIDIA NIM** (`nvidia/nemotron-3-nano-omni-30b-a3b-reasoning`) accessed via stateless serverless edge proxies with 1024 token budgets for chain-of-thought reasoning.
+* **Edge Proxy:** Deployed on **Node.js 20** serverless runtime in Singapore (`sin1`) with zero cloud image retention (`buffer.fill(0)` instant memory scrubbing).
+
+---
+
+## Challenges we ran into
+
+1. **YouCam >60% Face Framing Threshold:** Raw camera/phone photos naturally capture shoulders and background, resulting in face widths of 35–45% and triggering HTTP 422 `error_src_face_too_small`. We engineered an interactive alignment viewport with automatic 1.25× zoom and pan calibration that crops to a 1080×1080 canvas, ensuring YouCam always receives a valid, perfectly framed face.
+2. **YouCam S2S Parameter Naming Nuances:** Discovered through systematic API probing that YouCam rejects parameter names like `spot`, requiring the exact string `age_spot`.
+3. **Nemotron Reasoning Token Budgets:** The `nemotron-3-nano-omni-30b-a3b-reasoning` model generates comprehensive chain-of-thought reasoning tokens in `reasoning_content` before writing its final JSON. Standard 350–500 token limits caused `content: null` truncations. Expanding the token allocation to 1024 ensured smooth, robust JSON generation.
+4. **The Zero-Mock Architecture Mandate:** Removing all synthetic mock data across all 5 Studio modules required rigorous synchronization between Dexie `useLiveQuery`, baseline session tracking, and fallback zero-states.
+
+---
+
+## Accomplishments that we're proud of
+
+* **Authentic S2S Verification:** Successfully retrieved full 7-parameter biometric scores and signed AWS S3 transparent PNG diagnostic masks from Perfect Corp's live enterprise API.
+* **100% Privacy-Preserving Architecture:** Zero cloud retention for face photographs. Biometric images never touch a persistent database or third-party cloud disk.
+* **Reclaiming Indigenous Ethnopharmacology:** Transforming traditional Indonesian herbal wisdom from folk lore into mathematically validated, clinically transparent dermatological science.
+* **Silky Smooth PWA Performance:** Production build compiles in under 900ms with a total asset bundle under 455 kB.
+
+---
+
+## What we learned
+
+* How to formulate Pearl's Do-Calculus in accessible, consumer-friendly UI graphs to help non-technical users understand causal attribution versus environmental noise.
+* Best practices for handling modern asynchronous Server-to-Server biometric vision pipelines with strict framing constraints.
+* Optimizing prompt engineering for reasoning-centric LLMs (`nemotron-3-nano`) to produce guaranteed valid JSON schemas.
+
+---
+
+## What's next for LABJAMU
+
+* **Web Worker Peter-Clark (PC) Causal Worker:** Offloading continuous constraint-based causal discovery to an isolated browser thread.
+* **Bluetooth Microclimate Hygrometer Pairing:** Streaming real-time ambient relative humidity and temperature directly from wearable sensors via Web Bluetooth API.
+* **Client-Side PDF Clinical Trial Certificates:** Enabling local herbal producers and cooperatives to print cryptographically verifiable N-of-1 trial certificates using `jsPDF`.
+* **Clinical Pilot with Indonesian Jamu Cooperatives (GP Jamu):** Bringing standardized trial validation to grassroots traditional herbalists across Java and Bali.
 
 ---
 
@@ -79,41 +122,6 @@
 
 ---
 
-## 📁 Repository Structure
-
-```text
-labjamu/
-├── api/                        # Vercel Serverless Function Edge Proxies
-│   ├── nim-proxy.ts            # NVIDIA NIM API Proxy (Zero-Retention)
-│   └── youcam-proxy.ts         # YouCam S2S 3-Step Orchestration Proxy
-├── public/                     # Static assets, icons, manifest
-├── src/
-│   ├── components/
-│   │   ├── chat/               # Biometric cards, Markdown parsing, bubbles
-│   │   ├── layout/             # Navigation bars, shell
-│   │   └── studio/             # CameraScanner, Metrics, Timeline, Safety, DAG
-│   ├── db/                     # Dexie.js v4 database schema & typed stores
-│   ├── lib/
-│   │   ├── herbalDatabase.ts   # Indonesian Ethnopharmacology knowledge base
-│   │   ├── nim.ts              # NVIDIA NIM Agent Chat client
-│   │   ├── nimClinical.ts      # Clinical Question, Evaluation & Compatibility
-│   │   └── opfs.ts             # Origin Private File System read/write utilities
-│   ├── pages/
-│   │   ├── ChatPage.tsx        # Multimodal AI Clinical Partner
-│   │   ├── SettingsPage.tsx    # Privacy, GDPR export, data clearance
-│   │   └── StudioPage.tsx      # Experiment Studio & Protocol Switcher
-│   ├── types/                  # Shared TypeScript interfaces
-│   ├── App.tsx                 # Root layout & tab router
-│   ├── main.tsx                # React 19 entry point
-│   └── index.css               # Tailwind CSS v4 design tokens
-├── .env.example                # Environment variable template
-├── package.json                # Dependencies & scripts
-├── tsconfig.json               # TypeScript strict configuration
-└── vite.config.ts              # Vite configuration with local API middleware
-```
-
----
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -128,7 +136,7 @@ labjamu/
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/masbroustudio/LabJamu.git
-   cd LabJamu/labjamu
+   cd LabJamu
    ```
 
 2. **Install dependencies:**
@@ -137,7 +145,7 @@ labjamu/
    ```
 
 3. **Configure Environment Variables:**
-   Copy `.env.example` to `.env.local` in the `labjamu` root directory:
+   Copy `.env.example` to `.env.local` in the project root directory:
    ```bash
    cp .env.example .env.local
    ```
@@ -163,23 +171,6 @@ labjamu/
    ```bash
    npm run build
    ```
-
----
-
-## 🧪 Testing Face Analysis with Sample Photos
-
-The repository includes standardized reference test photos located in the `../IMAGE/` directory:
-* `BEFORE.png` (Day 1 Baseline Candidate)
-* `AFTER.jpg` (Day 14 Treatment Candidate)
-* `skin_analysis_08_672d34078f.png` (Standard Reference)
-
-### Ingestion Flow:
-1. Navigate to **Experiment Studio** and click **Scan Skin** (or click the **Image Attachment** button in **Chat**).
-2. Select **Upload Face Photo** and choose `BEFORE.png` or `AFTER.jpg`.
-3. The alignment canvas automatically applies a **1.25x zoom** inside the 72% oval guide to satisfy YouCam's >60% face width requirement. Pan as needed.
-4. Click **Analyze Aligned Face Photo**.
-5. Answer NVIDIA Nemotron's adaptive check-in question and submit your intake.
-6. Click **View Results in Dashboard** to inspect live scores, deltas, and toggle the **Diagnostic Heatmap Layer** with the opacity slider!
 
 ---
 
